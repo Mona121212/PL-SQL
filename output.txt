@@ -1,0 +1,88 @@
+start d:\cprg307\Create_MM.sql
+desc MM_MEMBER;
+select*from MM_MEMBER;
+select*from MM_MEMBER;
+
+UPDATE MM_MEMBER                                                  
+  2  SET CREDIT_CARD = '123456789000'
+  3  WHERE MEMBER_ID = 15;
+
+ select*from MM_MEMBER;
+
+ delete from MM_MEMBER
+  2  WHERE MEMBER_ID = 15;
+
+select*from MM_MEMBER;
+commit;
+
+desc MM_MOVIE;
+
+
+ SELECT*FROM MM_MOVIE;
+
+  // join connect to different table
+SELECT MM_MOVIE.MOVIE_TITLE, MM_RENTAL.RENTAL_ID, MM_MEMBER.LAST 
+  2  FROM MM_RENTAL
+  3  JOIN MM_MEMBER
+  4  ON MM_RENTAL.MEMBER_ID = MM_MEMBER.MEMBER_ID
+  5  JOIN MM_MOVIE
+  6  ON MM_RENTAL.MOVIE_ID = MM_MOVIE.MOVIE_ID
+  7  ORDER BY MM_RENTAL.RENTAL_ID;
+
+// general way connect different table
+select mv.MOVIE_TITLE, r.RENTAL_ID, m.LAST
+  2  FROM MM_RENTAL r, MM_MEMBER m, MM_MOVIE mv
+  3  WHERE r.MEMBER_ID = m.MEMBER_ID
+  4  AND r.MOVIE_ID = mv.MOVIE_ID;
+
+// create a new table
+CREATE TABLE MY_TABLE( MY_NUMBER NUMBER, MY_DATE DATE, MY_STRING VARCHAR2(5));
+
+ DESC MY_TABLE;
+
+// create an object
+ CREATE SEQUENCE seq_movie_id
+  2  START WITH 20
+  3  INCREMENT BY 2;
+
+
+
+  select sequence_name, last_number, increment_by
+  2  from user_sequences
+  3  where sequence_name = 'SEQ_MOVIE_ID';
+
+SELECT seq_movie_id.NEXTVAL AS next_number
+  2  from dual;
+
+ALTER SEQUENCE seq_movie_id
+  2  INCREMENT BY 5;
+
+select sequence_name, last_number, increment_by
+  2  from user_sequences
+  3  where sequence_name = 'SEQ_MOVIE_ID';
+
+desc MM_MOVIE;
+
+SELECT constraint_name, constraint_type, search_condition
+  2  from user_constraints
+  3  where table_name = 'MM_MOVIE';
+
+ insert into MM_MOVIE(MOVIE_ID, MOVIE_TITLE, MOVIE_CAT_ID,MOVIE_VALUE,MOVIE_QTY) VALUES(seq_movie_id.NEXTVAL,  'Alien', 4, 10, 2); 
+
+1 row created.
+
+select*from MM_MOVIE;
+//check the result of tables after join 
+create or replace view view_MOVIE_RENTAL AS
+  2  select mv.movie_title,
+  3  r.rental_id,
+  2  select mv.movie_title,
+  3  r.rental_id,
+  4  m.last
+  5  from MM_RENTAL r
+  6  join MM_MEMBER m ON r.MEMBER_ID = m.member_id
+  7  join mm_movie mv on r.movie_id = mv.movie_id;
+  6  join MM_MEMBER m ON r.MEMBER_ID = m.member_id
+  7  join mm_movie mv on r.movie_id = mv.movie_id;
+
+SELECT*FROM view_movie_rental;
