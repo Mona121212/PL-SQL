@@ -12,10 +12,10 @@ SET ECHO off;
 
 
 DECLARE
-    v_name VARCHAR2(50);
+    v_name CONSTANT VARCHAR2(50) := 'Mona';
     v_age NUMBER;
     v_initial CHAR;
-    v_salary NUMBER;
+    v_salary NUMBER NOT NULL := 50000.00;
     v_is_employee BOOLEAN; -- boolean is not printing directly not support for SQL f
     v_hire_date DATE;
 BEGIN
